@@ -1,0 +1,63 @@
+body {
+    color: #29435a;
+
+}
+
+.heading h1 {
+    text-align: center;
+    font-family: 'Lexend Deca', sans-serif;
+    color: #29435a;
+    font-weight: bold;
+    background-color: rgba(128, 128, 128, 0.399);
+}
+
+.intro-para p {
+    margin: auto;
+    width: 1300px;
+    padding: 30px;
+    font-family: 'Lexend Deca', sans-serif;
+    color: #2E475D;
+
+}
+
+.heading h3 {
+    text-align: center;
+    font-family: 'Lexend Deca', sans-serif;
+    color: #29435a;
+    font-weight: bold;
+}
+
+.drop-down {
+    text-align: center;
+}
+
+/* Id Styling */
+#category {
+    width: 200px;
+    margin: 0 auto;
+    display: block;
+    padding: 10px;
+    color: #29435a;
+}
+
+#quiz-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #29435a;
+}
+
+.question {
+    text-align: left;
+    margin-bottom: 20px;
+    max-width: 600px;
+    width: 100%;
+    overflow: auto;
+}
+
+.question ul {
+    text-align: left;
+    margin: auto;
+    list-style-type: decimal;
+    padding: 0;
+}

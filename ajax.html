@@ -1,0 +1,94 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Assignment</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="heading">
+        <h1 style="color: #29435a;">Quiz App</h1>
+    </div>
+    <div class="intro-para">
+        <!-- https://opentdb.com/api_config.php  Open Trivia Db -->
+        <p>A quiz app designed for interactive and engaging learning experiences, our platform offers users the ability
+            to
+            seamlessly select their preferred category before diving into a dynamic quiz environment. Upon choosing a
+            category, the app automatically loads a curated set of questions, ensuring a tailored quiz experience that
+            aligns with the user's interests or learning goals. The user-friendly interface provides a smooth navigation
+            experience, allowing participants to focus on answering questions without interruptions. With a diverse
+            range of
+            categories to choose from, our quiz app caters to a wide audience, making learning fun, accessible, and
+            customizable. Whether users are looking to test their knowledge or explore new topics, our quiz app delivers
+            a
+            rich and interactive learning journey.</p>
+    </div>
+    <div class="heading">
+        <h3 style="color: #29435a;">Get Started with the Quiz</h3>
+    </div>
+    <div class="drop-down">
+        <select id="category" onchange="fetchQuizQuestions()">
+            <option value="9">General Knowledge</option>
+            <option value="10">Music</option>
+            <option value="11">Film</option>
+            <option value="12">Books</option>
+            <option value="13">Television</option>
+            <option value="14">Sports</option>
+            <option value="15">History</option>
+            <option value="16">Art</option>
+        </select>
+    </div>
+    <div class="quiz">
+        <div id="quiz-container"></div>
+        <script>
+            async function fetchQuizQuestions() {
+                const selectedCategory = document.getElementById('category').value;
+                const apiUrl = `https://opentdb.com/api.php?amount=5&category=${selectedCategory}&type=multiple`;
+
+                try {
+                    const response = await fetch(apiUrl);
+                    const data = await response.json();
+                    displayQuizQuestions(data.results);
+                } catch (error) {
+                    console.error('Error fetching quiz questions:', error);
+                }
+            }
+
+            function displayQuizQuestions(questions) {
+                // This line gets a reference to the HTML element with the id 'quiz-container'. 
+                // This element is where the quiz questions will be displayed.
+                // document.getElementById('myDiv') is used to retrieve the HTML element with the id 'myDiv'.    
+                const quizContainer = document.getElementById('quiz-container');
+
+                quizContainer.innerHTML = '';
+
+                questions.forEach((question, index) => {
+                    const questionElement = document.createElement('div');
+                    questionElement.className = 'question';
+                    questionElement.innerHTML = `
+                        <p>${index + 1}. ${question.question}</p>
+                        <ul>
+                            ${question.incorrect_answers.map(choice => `<li>${choice}</li>`).join('')}
+                            <li>${question.correct_answer}</li>
+                        </ul>
+                    `;
+                    quizContainer.appendChild(questionElement);
+                });
+            }
+        </script>
+
+    </div>
+    <!-- MDB -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"></script>
+</body>
+
+</html>
